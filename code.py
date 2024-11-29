@@ -1,7 +1,6 @@
 import sys
 import os
 import random
-from xml.dom.pulldom import CHARACTERS
 
 counter = 0
 counter_set = 0
@@ -35,31 +34,27 @@ damage_taken = 0
 
 
 ### Title Screen ###
-def title_screen_selections(self=None):
+def title_screen_selections():
     option = input('>: ')
-    if option.lower() == '1':
-        Character.setup_game(self) #erro aqui
 
+    if option.lower() == '1':
+        setup_game()
     elif option.lower() == '2':
         help_menu()
-
     elif option.lower() == '0':
         sys.exit()
-
     while option.lower() not in ['1', '2', '0']:
         option = input('>: ')
         if option() == '1':
-            Character.setup_game(self)
-
+            setup_game()
         elif option() == '2':
             help_menu()
-
         elif option() == '0':
             sys.exit()
 
 
 def title_screen():
-    os.system('clear')
+    os.system('cls')
     print(
         '##################################################################################################################################')
     print(
@@ -78,267 +73,24 @@ def title_screen():
         '##################################################################################################################################')
     print(
         '##################################################################################################################################')
-    print('The Ring´s Quest: Survival Text RPG.\n')
+    print('The Crusader\'s Quest: Survival Text RPG.\n')
     print('  1 Play  ')
     print('  2 Tips  ')
     print('  0 Quit   ')
-    title_screen_selections() #erro aqui
+    title_screen_selections()
 
 
 def help_menu():
     print('Human, Dwarf, and Dunedain are the best races for beginners.')
     print('The Adventurer class works well with every race, but is not necessarily the best.')
+
     title_screen_selections()
 
 
 ### Character Creation ###
 
 # Name #
-class Character:
-    def __init__(self):
-        self.name = ""
-        self.hp = 0
-        self.max_hp = 0
-        self.martial_prowess = 0
-        self.consumption_rate = 0
-        self.endurance = 10
-        self.food = 0
-        self.max_food = 0
-        self.race = ""
-        self.luck = 0
-        self.arrows = 0
-        self.max_arrows = 0
-        self.speed = 0
-        self.occupation = ""
-        self.illness = False
-        self.illness_chance = 0
-        self.gold = 0
-        self.max_gold = 0
-        self.durability = 0
-        self.weapon = ""
-        self.max_heal_item = 0
-        self.adventure_state = False
-
-    def setup_game(self):
-        self.arrows = 0 #erro aqui
-        self.gold = 0
-        self.food = 0
-        self.max_arrows = 0
-        self.max_gold = 0
-        self.max_food = 0
-        self.hp = 0
-        self.max_hp = 0
-        self.martial_prowess = 0
-        self.heal_item = 0
-        self.endurance = 10
-        self.adventure_state = False
-        os.system('clear')
-
-        print('The One Ring is the most powerful object in Middle Earth, being able to control all races. During this quest, it is up to you to destroy the Ring.\n')
-        print('You begin your journey in The Shire, one of the many towns you hope to pass through.\n')
-        print('What is your name?\n')
-        self.name = input('>: ')
-        os.system('clear')
-        print('What is your race?\n')
-        print('1 Human\n2 Dwarf\n3 Dunedain\n4 Hobbit\n5 Elf\n6 Uruk-hai\n7 Maiar\n')
-
-        selection = input('>: ')
-        self.choose_race(selection)
-        os.system('clear')
-
-    def choose_race(self, selection):
-        if selection == '1':
-                self.race = "Human"
-                self.hp = 25
-                self.max_hp = 25
-                self.martial_prowess = 10
-                self.consumption_rate = 10
-                self.endurance = 30
-                self.gold = 100
-                self.luck = 0
-                self.speed = 0
-
-        elif selection == '2':
-                self.race = "Dwarf"
-                self.hp = 50
-                self.max_hp = 50
-                self.martial_prowess = 30
-                self.consumption_rate = 20
-                self.endurance = 240
-                self.gold = 200
-                self.luck = 0
-                self.speed = 0
-
-        elif selection == '3':
-                self.race = "Dunedain"
-                self.hp = 200
-                self.max_hp = 200
-                self.martial_prowess = 20
-                self.consumption_rate = 20
-                self.endurance = 240
-                self.gold = 100
-                self.luck = 0
-                self.speed = 0
-
-        elif selection == '4':
-                self.race = "Hobbit"
-                self.hp = 25
-                self.max_hp = 25
-                self.martial_prowess = 0
-                self.consumption_rate = 20
-                self.endurance = 200
-                self.gold = 100
-                self.luck = 0
-                self.speed = 0
-
-        elif selection == '5':
-                self.race = "Elf"
-                self.hp = 10
-                self.max_hp = 10
-                self.martial_prowess = 0
-                self.consumption_rate = 10
-                self.endurance = 1000
-                self.gold = 100
-                self.luck = 0
-                self.speed = 0
-
-        elif selection == '6':
-                self.race = "Uruk-hai"
-                self.hp = 25
-                self.max_hp = 25
-                self.martial_prowess = 50
-                self.consumption_rate = 30
-                self.endurance = 100
-                self.gold = 0
-                self.luck = 0
-                self.speed = 0
-
-        elif selection == '7':
-                self.race = "Maiar"
-                self.hp = 100
-                self.max_hp = 100
-                self.martial_prowess = 10
-                self.consumption_rate = 10
-                self.endurance = 100
-                self.gold = 1000
-                self.luck = 0
-                self.speed = 0
-
-        else:
-                self.race = "Human"
-                self.hp = 25
-                self.max_hp = 25
-                self.martial_prowess = 10
-                self.consumption_rate = 10
-                self.endurance += 30
-                self.gold = 100
-                self.luck = 0
-                self.speed = 0
-
-        print('You are ' + name + ', the ' + race + ' ' + occupation + '. You wield a ' + self.weapon + '.\n')
-        print('1 Begin Adventure\n2 Restart')
-        selection = input('>: ')
-        if selection == '1':
-            start_game()
-        else:
-            title_screen()
-
-        print('What kind of weapon do you want to use? (ie. sword, poleaxe, etc.)')
-        self.weapon = input('>: ')
-        gold_mechanic()
-        os.system('clear')
-
-        print('What is your weapon called? (ie. Thorn, Crusher, etc.)')
-        weapon = input('>: ')
-        os.system('clear')
-
-    ### Death ###
-
-def death():
-    os.system('cls')
-    print('You have died.\n')
-    selection = input('Press enter enter to continue')
-    char_menu()
-    print()
-    print('1 Menu\n')
-    selection = input('>: ')
-    if selection == '1':
-        title_screen()
-    else:
-        title_screen()
-
-
-### Food and Endurance Mechanic ###
-
-def food_endurance_mechanic():
-    global food
-    global endurance
-    global consumption_rate
-    if food < consumption_rate and food > 0:
-        food = 0
-    elif food > 1:
-        food = food - consumption_rate
-    elif food < 1:
-        food = 0
-        endurance = endurance - consumption_rate
-        if endurance < 1:
-            endurance = 0
-            death()
-        elif endurance <= consumption_rate:
-            print('If you do not get food, you will starve to death.')
-
-
-
-### Resource Mechanics ###
-
-def hp_mechanic():
-    global hp
-    global max_hp
-    if hp > max_hp:
-        hp = max_hp
-        print('You have max HP.')
-    if hp < 1:
-        hp = 0
-        death()
-
-
-def gold_mechanic():
-    global gold
-    global max_gold
-    if gold < 1:
-        gold = 0
-    if gold > max_gold:
-        gold = max_gold
-        print('You have completely filled your coin purse.')
-    if gold < 1:
-        gold = 0
-
-
-def food_mechanic():
-    global food
-    global max_food
-    if food > max_food:
-        food = max_food
-        print('You have maxed out your food supply.')
-    if food < 1:
-        food = 0
-
-
-def arrows_mechanic():
-    global arrows
-    global max_arrows
-    if arrows < 1:
-        arrows = 0
-    if arrows > max_arrows:
-        arrows = max_arrows
-        print('You have maxed out your arrow count.')
-    if arrows < 1:
-        arrows = 0
-
-
-### Character Menu ###
-def char_menu():
-    os.system('clear')
+def setup_game():
     global name
     global hp
     global max_hp
@@ -357,25 +109,337 @@ def char_menu():
     global illness_chance
     global gold
     global max_gold
+    global durability
     global weapon
+    global max_heal_item
+    global adventure_state
 
-    print('######################')
-    print('Name: ' + name + '')
-    print('Race: ' + race + '')
-    print('Occupation: ' + occupation + '')
-    print('######################')
-    print('HP: ' + str(hp) + '/' + str(max_hp) + '')
-    print('Martial Prowess: ' + str(martial_prowess) + '')
-    print('Weapon: ' + weapon + '')
-    print('######################')
-    print('Consumption Rate: ' + str(consumption_rate) + '')
-    print('Food: ' + str(food) + '/' + str(max_food) + '')
-    print('Endurance: ' + str(endurance) + '')
-    print('Arrows: ' + str(arrows) + '/' + str(max_arrows) + '')
-    print('######################')
-    print('Gold: ' + str(gold) + '/' + str(max_gold) + '')
-    print('######################\n')
-    selection = input('Press enter to continue')
+    arrows = 0
+    gold = 0
+    food = 0
+    max_arrows = 0
+    max_gold = 0
+    max_food = 0
+    hp = 0
+    max_hp = 0
+    martial_prowess = 0
+    heal_item = 0
+    endurance = 10
+    adventure_state = False
+    os.system('cls')
+    print('The One Ring is the most powerful object in Middle Earth, being able to control all races. During this quest, it is up to you to destroy the Ring.\n')
+    print('You begin your journey in The Shire, one of the many towns you hope to pass through.\n')
+    print('What is your name?\n')
+
+    name = input('>: ')
+
+    # Race #
+    os.system('cls')
+    print('What is your race?\n')
+    print('1 Human\n2 Dwarf\n3 Dunedain\n4 Hobbit\n5 Elf\n6 Uruk-hai\n7 Maiar\n')
+
+    selection = input('>: ')
+    if selection == '1':
+        race = "Human"
+        hp = 25
+        max_hp = 25
+        martial_prowess = 10
+        consumption_rate = 10
+        endurance = 30
+        gold = 100
+        luck = 0
+        speed = 0
+
+    elif selection == '2':
+        race = "Dwarf"
+        hp = 50
+        max_hp = 50
+        martial_prowess = 30
+        consumption_rate = 20
+        endurance = 240
+        gold = 200
+        luck = 0
+        speed = 0
+
+    elif selection == '3':
+        race = "Dunedain"
+        hp = 200
+        max_hp = 200
+        martial_prowess = 20
+        consumption_rate = 20
+        endurance = 240
+        gold = 100
+        luck = 0
+        speed = 0
+
+    elif selection == '4':
+        race = "Hobbit"
+        hp = 25
+        max_hp = 25
+        martial_prowess = 0
+        consumption_rate = 20
+        endurance = 200
+        gold = 100
+        luck = 0
+        speed = 0
+
+    elif selection == '5':
+        race = "Elf"
+        hp = 10
+        max_hp = 10
+        martial_prowess = 0
+        consumption_rate = 10
+        endurance = 1000
+        gold = 100
+        luck = 0
+        speed = 0
+
+    elif selection == '6':
+        race = "Uruk-hai"
+        hp = 25
+        max_hp = 25
+        martial_prowess = 50
+        consumption_rate = 30
+        endurance = 100
+        gold = 0
+        luck = 0
+        speed = 0
+
+    elif selection == '7':
+        race = "Maiar"
+        hp = 100
+        max_hp = 100
+        martial_prowess = 10
+        consumption_rate = 10
+        endurance = 100
+        gold = 1000
+        luck = 0
+        speed = 0
+
+    else:
+        race = "Human"
+        hp = 25
+        max_hp = 25
+        martial_prowess = 10
+        consumption_rate = 10
+        endurance = endurance + 30
+        gold = 100
+        luck = 0
+        speed = 0
+
+    os.system('cls')
+
+    # Occupation #
+    print('What is your occupation?\n')
+    print('1 Hunter\n2 Knight\n3 Adventurer\n4 Assassin\n5 Glutton\n')
+
+    selection = input('>: ')
+    if selection == '1':
+        occupation = 'Hunter'
+        hp = hp + 10
+        max_hp = max_hp + 10
+        food = food + 50
+        max_food = max_food + 150
+        arrows = arrows + 75
+        max_arrows = max_arrows + 100
+        gold = gold + 0
+        max_gold = max_gold + 800
+        martial_prowess = martial_prowess + 0
+    elif selection == '2':
+        occupation = 'Knight'
+        hp = hp + 100
+        max_hp = max_hp + 100
+        food = food + 25
+        max_food = max_food + 100
+        arrows = arrows + 8
+        max_arrows = max_arrows + 10
+        gold = gold + 400
+        max_gold = max_gold + 1000
+        martial_prowess = martial_prowess + 20
+    elif selection == '3':
+        occupation = 'Adventurer'
+        hp = hp + 25
+        max_hp = max_hp + 25
+        food = food + 75
+        max_food = max_food + 100
+        arrows = arrows + 20
+        max_arrows = max_arrows + 20
+        gold = gold + 100
+        max_gold = max_gold + 800
+        martial_prowess = martial_prowess + 10
+    elif selection == '4':
+        occupation = 'Assassin'
+        hp = hp + 0
+        max_hp = max_hp + 0
+        food = food + 25
+        max_food = max_food + 100
+        arrows = arrows + 8
+        max_arrows = max_arrows + 10
+        gold = gold + 100
+        max_gold = max_gold + 1000
+        martial_prowess = martial_prowess + 60
+    elif selection == '5':
+        occupation = 'Glutton'
+        hp = hp + 25
+        max_hp = max_hp + 25
+        food = food + 500
+        max_food = max_food + 500
+        arrows = arrows + 0
+        max_arrows = max_arrows + 1
+        gold = gold + 0
+        max_gold = max_gold + 1000
+        martial_prowess = martial_prowess + 0
+    else:
+        occupation = 'Hunter'
+        hp = hp + 10
+        max_hp = max_hp + 10
+        food = food + 50
+        max_food = max_food + 150
+        arrows = arrows + 75
+        max_arrows = max_arrows + 100
+        gold = gold + 0
+        max_gold = max_gold + 300
+        martial_prowess = martial_prowess + 0
+
+    os.system('cls')
+
+    print('What kind of weapon do you want to use? (ie. sword, poleaxe, etc.)')
+
+    weapon = input('>: ')
+    gold_mechanic()
+    os.system('cls')
+
+    print('You are ' + name + ', the ' + race + ' ' + occupation + '. You wield a ' + weapon + '.\n')
+    print('1 Begin Adventure\n2 Restart')
+    selection = input('>: ')
+    if selection == '1':
+        start_game()
+    else:
+        title_screen()
+
+### Death ###
+
+def death():
+        os.system('cls')
+        print('You have died.\n')
+        selection = input('Press enter enter to continue')
+        char_menu()
+        print()
+        print('1 Menu\n')
+        selection = input('>: ')
+        if selection == '1':
+            title_screen()
+        else:
+            title_screen()
+
+### Food and Endurance Mechanic ###
+
+def food_endurance_mechanic():
+        global food
+        global endurance
+        global consumption_rate
+        if food < consumption_rate and food > 0:
+            food = 0
+        elif food > 1:
+            food = food - consumption_rate
+        elif food < 1:
+            food = 0
+            endurance = endurance - consumption_rate
+            if endurance < 1:
+                endurance = 0
+                death()
+            elif endurance <= consumption_rate:
+                print('If you do not get food, you will starve to death.')
+
+        # need to work on restoring endurance#
+
+### Resource Mechanics ###
+
+def hp_mechanic():
+        global hp
+        global max_hp
+        if hp > max_hp:
+            hp = max_hp
+            print('You have max HP.')
+        if hp < 1:
+            hp = 0
+            death()
+
+def gold_mechanic():
+        global gold
+        global max_gold
+        if gold < 1:
+            gold = 0
+        if gold > max_gold:
+            gold = max_gold
+            print('You have completely filled your coin purse.')
+        if gold < 1:
+            gold = 0
+
+def food_mechanic():
+        global food
+        global max_food
+        if food > max_food:
+            food = max_food
+            print('You have maxed out your food supply.')
+        if food < 1:
+            food = 0
+
+def arrows_mechanic():
+        global arrows
+        global max_arrows
+        if arrows < 1:
+            arrows = 0
+        if arrows > max_arrows:
+            arrows = max_arrows
+            print('You have maxed out your arrow count.')
+        if arrows < 1:
+            arrows = 0
+
+        ### Character Menu ###
+
+def char_menu():
+        os.system('cls')
+        global name
+        global hp
+        global max_hp
+        global martial_prowess
+        global consumption_rate
+        global endurance
+        global food
+        global max_food
+        global race
+        global luck
+        global arrows
+        global max_arrows
+        global speed
+        global occupation
+        global illness
+        global illness_chance
+        global gold
+        global max_gold
+        global weapon
+
+        print('######################')
+        print('Name: ' + name + '')
+        print('Race: ' + race + '')
+        print('Occupation: ' + occupation + '')
+        print('######################')
+        print('HP: ' + str(hp) + '/' + str(max_hp) + '')
+        print('Martial Prowess: ' + str(martial_prowess) + '')
+        print('Weapon: ' + weapon + '')
+        print('######################')
+        print('Consumption Rate: ' + str(consumption_rate) + '')
+        print('Food: ' + str(food) + '/' + str(max_food) + '')
+        print('Endurance: ' + str(endurance) + '')
+        print('Arrows: ' + str(arrows) + '/' + str(max_arrows) + '')
+        print('######################')
+        # print('Luck: ' + str(luck) + '')
+        # print('Speed: ' + str(speed) + '\n')
+        # print('Illness: ' + illness + '')
+        print('Gold: ' + str(gold) + '/' + str(max_gold) + '')
+        print('######################\n')
+        selection = input('Press enter to continue')
 
 
 ### Adventure Menu ###
@@ -393,7 +457,7 @@ def adventure_menu():
     global max_gold
     global weapon
 
-    os.system('clear')
+    os.system('cls')
     print('######################')
     print('HP: ' + str(hp) + '/' + str(max_hp) + '')
     print('Food: ' + str(food) + '/' + str(max_food) + '')
@@ -686,10 +750,10 @@ def town():
     print('1 Tavern\n2 Blacksmith\n3 Character\n4 Adventure')
     selection = input('>: ')
     if selection == '1':
-        os.system('clear')
+        os.system('cls')
         tavern()
     if selection == '4':
-        os.system('clear')
+        os.system('cls')
         counter = 0
         the_map()
         print('You will brave the wilds for 5 days.')
@@ -697,10 +761,10 @@ def town():
         adventuring()
 
     if selection == '2':
-        os.system('clear')
+        os.system('cls')
         blacksmith()
     if selection == '3':
-        os.system('clear')
+        os.system('cls')
         char_menu()
         town()
     else:
@@ -715,7 +779,7 @@ def tavern():
     global hp
     global location
 
-    os.system('clear')
+    os.system('cls')
     print('######################')
     print('Gold: ' + str(gold) + '/' + str(max_gold) + '')
     print('HP: ' + str(hp) + '/' + str(max_hp) + '')
@@ -776,7 +840,7 @@ def tavern():
             print('You complete the transaction')
             gold_mechanic()
             input('Press enter to continue')
-            os.system('clear')
+            os.system('cls')
             tavern()
     if selection == '4':
         talk()
@@ -843,7 +907,7 @@ def blacksmith():
     global arrows
     global max_arrows
 
-    os.system('clear')
+    os.system('cls')
     print('######################')
     print('Gold: ' + str(gold) + '/' + str(max_gold) + '')
     print('Arrows: ' + str(arrows) + '/' + str(max_arrows) + '')
@@ -977,7 +1041,7 @@ def adventuring():
         else:
             death()
     counter = 0
-    os.system('clear')
+    os.system('cls')
     adventure_menu()
     print('You have survived the trip.')
     adventure_state = False
@@ -1044,7 +1108,7 @@ def hunt():
 
 ##Random Events
 def random_event():
-    n = random.randint(1, 20)
+    n = random.randint(1, 19)
     if n == 1:
         chest()
     if n == 2:
@@ -1080,10 +1144,8 @@ def random_event():
     if n == 17:
         bigger_bag()
     if n == 18:
-        lose_day()
-    if n == 19:
         fight()
-    if n == 20:
+    if n == 19:
         fight()
 
 
@@ -1199,35 +1261,6 @@ def bigger_bag():
         print('Max gold increased by 100.')
     print()
     input('Press enter to continue')
-
-
-### Lose a Day ###
-def lose_day(gold=None):
-    global counter
-    global location
-    v = random.randint(1, 3)
-    y: int = random.randint(1, 2)
-    k: int  = random.randint(1, 100)
-    counter = counter + v
-    if y == 1:
-        print('You realize that you are lost. It will take you ' + str(v) + ' days to get back on the right path.')
-    if y == 2:
-        if location == 'The Shire' or 'Rivendell':
-            print('You arrive at a bridge spanning a massive whitewater river that is guarded by a score of bandits. One bandit approaches you.')
-        elif location == 'Isengard' or 'Minas Tirith' or 'Minas Morgul':
-            print('You arrive at a bridge spanning an enormous chasm that is guarded by a score of bandits. One bandit approaches you.')
-            print('"If you want to cross this bridge, you have to pay us, ' + str(k)+ 'gold.\n')
-            print('1 Pay gold\n2 Take a detour\n')
-            selection = input('>: ')
-
-        if selection == '1':
-            if k > gold:
-                print('"That is not enough to cross, but we will keep what you gave us, and you can find another way around. Have fun out there."')
-                gold = 0
-            else:
-                gold = gold - k
-                print('You gave the bandit ' + str(k) + ' gold, and they let you cross the bridge.')
-
 
 ### Mystic ##
 def mystic():
@@ -1736,8 +1769,8 @@ def enemy_generator():
     global enemy_battlescore
 
     enemy_resetter()
-    Enemy.enemy_adjective_generator()
-    Enemy.enemy_type_generator()
+    enemy_adjective_generator()
+    enemy_type_generator()
 
 
 # Enemy Resetter #
@@ -1864,20 +1897,36 @@ class Enemy:
         print(f"Specific Arrows: {self.enemy_specific_arrows}")
         print(f"Specific Gold: {self.enemy_specific_gold}")
 
-    def enemy_adjective_generator():
-        global enemy_adjective
-        global enemy_battlescore
+def enemy_type_generator():
+    global enemy_type
+    global enemy_battlescore
+    global enemy_gold
+    global enemy_food
+    global enemy_arrows
+    global enemy_specific_gold
+    global enemy_specific_arrows
+    global enemy_specific_food
+    global enemy_locater
+    global enemy_exclude
+    global enemy_number
 
-        j = random.randint(1, 3)
-        if j == 1:
-            enemy_adjective = 'Bloodthirsty'
-            enemy_battlescore = enemy_battlescore + 35
-        if j == 2:
-            enemy_adjective = 'Regular'
-            enemy_battlescore = enemy_battlescore + 0
-        if j == 3:
-            enemy_adjective = 'Starved'
-            enemy_battlescore = enemy_battlescore - 10
+    enemy_locater_generator()
+
+
+def enemy_adjective_generator():
+    global enemy_adjective
+    global enemy_battlescore
+
+    j = random.randint(1, 3)
+    if j == 1:
+        enemy_adjective = 'Bloodthirsty'
+        enemy_battlescore = enemy_battlescore + 35
+    if j == 2:
+        enemy_adjective = 'Regular'
+        enemy_battlescore = enemy_battlescore + 0
+    if j == 3:
+        enemy_adjective = 'Starved'
+        enemy_battlescore = enemy_battlescore - 10
 
 enemy = Enemy()
 enemy.generate_enemy()
@@ -1948,7 +1997,7 @@ def chest_loot():
     adventure_menu()
 
 
-####### Salem #######
+#Mordor
 def Mordor():
     global counter
     global adventure_state
@@ -1974,7 +2023,7 @@ def Mordor():
     os.system('cls')
 
     print(
-        'You enter the ancient city of Mordor, now blackened with fire and as silent as a graveyard, and see a man who looks like a commoner lounging upon a throne of skeletons in the courtyard.')
+        'You enter the ancient city of Mordor, now blackened with fire and as silent as a graveyard, and see a man who looks like a commoner lounging upon a throne.')
     print('"Ah, ' + name + '", I was expecting you."\n')
     print('Type \'who are you?\'')
     input('>: ')
