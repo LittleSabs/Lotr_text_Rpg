@@ -351,7 +351,6 @@ def food_endurance_mechanic():
             elif endurance <= consumption_rate:
                 print('If you do not get food, you will starve to death.')
 
-        # need to work on restoring endurance#
 
 ### Resource Mechanics ###
 
@@ -396,7 +395,7 @@ def arrows_mechanic():
         if arrows < 1:
             arrows = 0
 
-        ### Character Menu ###
+#Character Menu
 
 def char_menu():
         os.system('cls')
@@ -434,9 +433,6 @@ def char_menu():
         print('Endurance: ' + str(endurance) + '')
         print('Arrows: ' + str(arrows) + '/' + str(max_arrows) + '')
         print('######################')
-        # print('Luck: ' + str(luck) + '')
-        # print('Speed: ' + str(speed) + '\n')
-        # print('Illness: ' + illness + '')
         print('Gold: ' + str(gold) + '/' + str(max_gold) + '')
         print('######################\n')
         selection = input('Press enter to continue')
@@ -471,7 +467,7 @@ def adventure_menu():
     print('######################\n')
 
 
-### Map ###    Update this to turn X into another symbol when that location is active
+### Map
 def the_map():
 
     if location == 'The Shire':
@@ -709,7 +705,6 @@ def location_changer():
     if location == 'Last Refuge':
         location = 'Rivendell'
         blacksmith_price_generator()
-        #end_game() function does not exist
         town()
 
 
@@ -889,7 +884,7 @@ def talk():
             part = 'toe'
         print('In the wilds, I got caught in a hunter\'s trap. That\'s how I lost my ' + part + '.')
     if dialogue == 9:
-        print('Tales of the beasts and Satanic denizens in the wilds have kept me inside the city walls.')
+        print('Tales of the beasts and Saurons denizens in the wilds have kept me inside the city walls.')
     if dialogue == 10:
         print('The good thing about resting at ' + location + ' Inn is that you get a complimentary meal.')
     input('Press enter to continue')
@@ -1285,8 +1280,8 @@ def mystic():
     global weapon
     global consumption_rate
 
-    print('You come upon a roaming mystic.')
-    print('The mystic offers you a blessing.\n')
+    print('You come upon a roaming Tom Bombadil.')
+    print('Tom Bombadil offers you a blessing.\n')
     print('Increase:\n1 Max HP\n2 Endurance\n3 Martial Prowess\n')
     selection = input('>: ')
     os.system('cls')
@@ -1607,7 +1602,7 @@ def robbed():
         y = random.randint(1, 2)
         adventure_menu()
         if y == 1:
-            print('During the night, a shadowy figure, a nazgul, stole ' + str(v) + ' of your food.')
+            print('During the night, a small and slimy creature, the Gollum, stole ' + str(v) + ' of your food.')
         elif y == 2:
             print('You check your food supply and find that ' + str(v) + ' food is missing.')
     elif x == 2:
@@ -1619,7 +1614,7 @@ def robbed():
         y = random.randint(1, 2)
         adventure_menu()
         if y == 1:
-            print('During the night, a shadowy figure, a nazgul, stole ' + str(v) + ' of your arrows.')
+            print('During the night, a small and slimy creature, the Gollum, stole ' + str(v) + ' of your arrows.')
         elif y == 2:
             print('You check your arrow quill, and find that ' + str(v) + ' arrows are missing.')
 
@@ -1632,7 +1627,7 @@ def robbed():
         y = random.randint(1, 2)
         adventure_menu()
         if y == 1:
-            print('During the night, a shadowy, a nazgul, figure stole ' + str(v) + ' of your gold.')
+            print('During the night, a small and slimy creature, the Gollum, figure stole ' + str(v) + ' of your gold.')
         elif y == 2:
             print('You check your coin purse, and find that ' + str(v) + ' gold is missing.')
 
@@ -1826,7 +1821,6 @@ def enemy_locater_generator():
 
 class Enemy:
     def __init__(self):
-        # Initialize the enemy's attributes
         self.enemy_type = ""
         self.enemy_battlescore = 0
         self.enemy_gold = 0
@@ -1845,35 +1839,35 @@ class Enemy:
     def generate_enemy(self):
         self.enemy_locater_generator()
         if self.enemy_number == 1:
-            self.enemy_type = 'Lone Wolf'
+            self.enemy_type = 'Troll'
             self.enemy_battlescore += 35
             self.enemy_specific_food = 2
             self.enemy_specific_arrows = 0
             self.enemy_specific_gold = 0
 
         elif self.enemy_number == 2:
-            self.enemy_type = 'Large Maggot'
+            self.enemy_type = 'Ork'
             self.enemy_battlescore += 15
             self.enemy_specific_food = 1
             self.enemy_specific_arrows = 0
             self.enemy_specific_gold = 0
 
         elif self.enemy_number == 3:
-            self.enemy_type = 'Rogue Vampire'
+            self.enemy_type = 'Demon'
             self.enemy_battlescore += 55
             self.enemy_specific_food = 0
             self.enemy_specific_arrows = 0
             self.enemy_specific_gold = 5
 
         elif self.enemy_number == 4:
-            self.enemy_type = 'Dark Cultist'
+            self.enemy_type = 'Balrogs'
             self.enemy_battlescore += 85
             self.enemy_specific_food = 10
             self.enemy_specific_arrows = 0
             self.enemy_specific_gold = 10
 
         elif self.enemy_number == 5:
-            self.enemy_type = 'Doppelganger'
+            self.enemy_type = 'Nazgul'
             self.enemy_battlescore += 105
             self.enemy_specific_food = 10
             self.enemy_specific_arrows = 0
@@ -1919,13 +1913,13 @@ def enemy_adjective_generator():
 
     j = random.randint(1, 3)
     if j == 1:
-        enemy_adjective = 'Bloodthirsty'
+        enemy_adjective = 'Nazgul'
         enemy_battlescore = enemy_battlescore + 35
     if j == 2:
-        enemy_adjective = 'Regular'
+        enemy_adjective = 'Troll'
         enemy_battlescore = enemy_battlescore + 0
     if j == 3:
-        enemy_adjective = 'Starved'
+        enemy_adjective = 'Demon'
         enemy_battlescore = enemy_battlescore - 10
 
 enemy = Enemy()
@@ -2052,7 +2046,7 @@ def Mordor():
         print('"Very well, then." Sauron stands up.')
         input('Press enter to fight')
 
-        enemy_battlescore = 170
+        enemy_battlescore = 500
         damage_taken = enemy_battlescore - martial_prowess
         hp = int(hp - damage_taken)
         if hp > 0:
@@ -2080,4 +2074,4 @@ def Mordor():
         Mordor()
 
 
-title_screen() #erro aqui
+title_screen()
